@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>リアルタイムダッシュボード</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="dashboard-container">
+            <header>
+        <div class="header-content">
+            <div class="header-left">
+                <h1>Dashboard</h1>
+                <div class="mascot-container">
+                    <img src="九州電力「みらいくん」.png" alt="みらいくん" class="mascot-character" id="miraikunImg">
+                    <div class="speech-bubble" id="speechBubble">
+                        <div class="speech-text" id="speechText">明日の準備もお忘れなく！</div>
+                        <div class="speech-arrow"></div>
+                    </div>
+                </div>
+            </div>
+            <nav class="header-nav">
+                <a href="quality.html" class="nav-link">品質評価</a>
+            </nav>
+        </div>
+    </header>
+        
+        <div class="dashboard-grid">
+            <!-- 上段左：本日のお客様対応件数 -->
+            <div class="metric-card total-contacts">
+                <div class="metric-header">
+                    <h3>本日のお客様対応件数</h3>
+                    <span class="metric-period">今日</span>
+                </div>
+                <div class="metric-value" id="totalContacts">241</div>
+                <div class="comparison-metrics">
+                    <div class="comparison-item">
+                        <span class="comparison-label">前営業日実績</span>
+                        <span class="comparison-value" id="previousDayContacts">215</span>
+                    </div>
+                    <div class="comparison-item">
+                        <span class="comparison-label">先週平均</span>
+                        <span class="comparison-value" id="weeklyAvgContacts">198</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 上段中左：サービスレベル -->
+            <div class="metric-card service-level">
+                <div class="metric-header">
+                    <h3>サービスレベル</h3>
+                    <span class="metric-period">今日</span>
+                </div>
+                <div class="circular-progress">
+                    <svg class="progress-ring" viewBox="0 0 120 120">
+                        <circle class="progress-ring-circle-bg" cx="60" cy="60" r="45"></circle>
+                        <circle class="progress-ring-circle" cx="60" cy="60" r="45" id="serviceProgress"></circle>
+                    </svg>
+                    <div class="progress-text">
+                        <span class="progress-value" id="serviceLevel">94</span>
+                        <span class="progress-unit">%</span>
+                    </div>
+                </div>
+                <div class="comparison-metrics">
+                    <div class="comparison-item">
+                        <span class="comparison-label">前営業日実績</span>
+                        <span class="comparison-value" id="previousServiceLevel">91%</span>
+                    </div>
+                    <div class="comparison-item">
+                        <span class="comparison-label">先週平均</span>
+                        <span class="comparison-value" id="weeklyAvgServiceLevel">89%</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 上段中右：平均待ち時間 -->
+            <div class="metric-card avg-wait-time">
+                <div class="metric-header">
+                    <h3>平均待ち時間</h3>
+                    <span class="metric-period">今日</span>
+                </div>
+                <div class="metric-value time-value" id="avgWaitTime">02:51</div>
+                <div class="comparison-metrics">
+                    <div class="comparison-item">
+                        <span class="comparison-label">前営業日実績</span>
+                        <span class="comparison-value time-value" id="previousAvgWaitTime">03:12</span>
+                    </div>
+                    <div class="comparison-item">
+                        <span class="comparison-label">先週平均</span>
+                        <span class="comparison-value time-value" id="weeklyAvgWaitTime">03:28</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 上段右：最長待ち時間 -->
+            <div class="metric-card max-wait-time">
+                <div class="metric-header">
+                    <h3>最長待ち時間</h3>
+                    <span class="metric-period">今日</span>
+                </div>
+                <div class="metric-value time-value" id="maxWaitTime">09:47</div>
+                <div class="comparison-metrics">
+                    <div class="comparison-item">
+                        <span class="comparison-label">前営業日実績</span>
+                        <span class="comparison-value time-value" id="previousMaxWaitTime">11:23</span>
+                    </div>
+                    <div class="comparison-item">
+                        <span class="comparison-label">先週平均</span>
+                        <span class="comparison-value time-value" id="weeklyAvgMaxWaitTime">12:15</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 下段左：稼働中のオペレーター数 -->
+            <div class="metric-card operators">
+                <div class="metric-header">
+                    <h3>稼働中のオペレーター数</h3>
+                    <span class="metric-period">ライブ</span>
+                </div>
+                <div class="operator-display">
+                    <div class="circular-chart">
+                        <svg viewBox="0 0 120 120" class="operator-chart-multi">
+                            <circle class="chart-bg" cx="60" cy="60" r="45" fill="none" stroke="#f0f0f0" stroke-width="8"></circle>
+                            <circle class="chart-active" cx="60" cy="60" r="45" fill="none" id="activeSegment"></circle>
+                            <circle class="chart-waiting" cx="60" cy="60" r="45" fill="none" id="waitingSegment"></circle>
+                            <circle class="chart-break" cx="60" cy="60" r="45" fill="none" id="breakSegment"></circle>
+                        </svg>
+                        <div class="operator-number" id="operatorCount">56</div>
+                        <div class="operator-total">/ <span id="totalOperators">80</span></div>
+                    </div>
+                    <div class="operator-breakdown">
+                        <!-- JavaScript で動的に生成 -->
+                    </div>
+                </div>
+                
+                <!-- 今日の問合せ分析 -->
+                <div class="inquiry-summary">
+                    <h4 class="summary-title">今日の問合せ分析</h4>
+                    <div class="summary-table">
+                        <div class="summary-header">
+                            <span>カテゴリ</span>
+                            <span>件数</span>
+                            <span>割合</span>
+                        </div>
+                        <div class="summary-data" id="inquirySummaryData">
+                            <!-- JavaScript で動的に生成 -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 下段右：品質向上アドバイス -->
+            <div class="metric-card quality-advice">
+                <div class="metric-header">
+                    <h3>品質向上アドバイス</h3>
+                    <span class="metric-period">AI提案</span>
+                </div>
+                
+                <div class="advice-container" id="adviceContainer">
+                    <!-- JavaScript で動的に生成 -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

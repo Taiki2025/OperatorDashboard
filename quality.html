@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>品質評価 - リアルタイムダッシュボード</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="quality.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="dashboard-container">
+        <header>
+            <div class="header-content">
+                <h1>品質評価</h1>
+                <nav class="header-nav">
+                    <a href="index.html" class="nav-link">ダッシュボード</a>
+                </nav>
+            </div>
+            <div class="last-updated">最終更新: <span id="lastUpdated"></span></div>
+        </header>
+        
+        <!-- フィルター -->
+        <div class="filter-section">
+            <div class="filter-card">
+                <div class="filter-group">
+                    <label for="periodFilter">期間</label>
+                    <select id="periodFilter" class="filter-select">
+                        <option value="today">今日</option>
+                        <option value="week" selected>今週</option>
+                        <option value="month">今月</option>
+                        <option value="quarter">四半期</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="categoryFilter">問合せカテゴリ</label>
+                    <select id="categoryFilter" class="filter-select">
+                        <option value="all" selected>全て</option>
+                        <option value="技術サポート">技術サポート</option>
+                        <option value="請求関連">請求関連</option>
+                        <option value="新規開通">新規開通</option>
+                        <option value="契約内容変更">契約内容変更</option>
+                        <option value="支払方法変更">支払方法変更</option>
+                        <option value="停電対応">停電対応</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="viewType">表示</label>
+                    <select id="viewType" class="filter-select">
+                        <option value="team" selected>チーム別</option>
+                        <option value="individual">個人別</option>
+                    </select>
+                </div>
+                
+                <button id="applyFilter" class="apply-filter-btn">適用</button>
+            </div>
+        </div>
+        
+        <!-- パフォーマンス概要 -->
+        <div class="performance-overview">
+            <div class="overview-card">
+                <h3>平均サービスレベル</h3>
+                <div class="overview-value" id="avgServiceLevel">92.4%</div>
+                <div class="overview-trend positive">+2.3%</div>
+            </div>
+            
+            <div class="overview-card">
+                <h3>平均応答時間</h3>
+                <div class="overview-value" id="avgResponseTime">02:45</div>
+                <div class="overview-trend negative">+0:15</div>
+            </div>
+            
+            <div class="overview-card">
+                <h3>顧客満足度</h3>
+                <div class="overview-value" id="customerSatisfaction">4.7</div>
+                <div class="overview-trend positive">+0.2</div>
+            </div>
+            
+            <div class="overview-card">
+                <h3>解決率</h3>
+                <div class="overview-value" id="resolutionRate">89.2%</div>
+                <div class="overview-trend positive">+1.8%</div>
+            </div>
+        </div>
+        
+        <!-- トップ5ランキング -->
+        <div class="ranking-section">
+            <div class="ranking-card">
+                <div class="ranking-header">
+                    <h3 id="rankingTitle">チーム別サービスレベル Top5</h3>
+                    <div class="ranking-period" id="rankingPeriod">今週 - 全カテゴリ</div>
+                </div>
+                
+                <div class="ranking-list" id="rankingList">
+                    <!-- JavaScript で動的に生成 -->
+                </div>
+            </div>
+            
+            <!-- 詳細チャート -->
+            <div class="chart-card">
+                <div class="chart-header">
+                    <h3>パフォーマンス推移</h3>
+                </div>
+                <div class="chart-container">
+                    <canvas id="performanceChart"></canvas>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 詳細分析 -->
+        <div class="analysis-section">
+            <div class="analysis-card">
+                <h3>詳細分析</h3>
+                <div class="analysis-grid" id="analysisGrid">
+                    <!-- JavaScript で動的に生成 -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="quality.js"></script>
+</body>
+</html>
