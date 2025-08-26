@@ -51,6 +51,9 @@ header {
     animation: float 3s ease-in-out infinite;
     cursor: pointer;
     transition: transform 0.3s ease;
+    /* 白い背景を透明にする */
+    mix-blend-mode: multiply;
+    filter: brightness(1.1) contrast(1.1);
 }
 
 .mascot-character:hover {
