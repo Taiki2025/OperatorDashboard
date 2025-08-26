@@ -72,14 +72,14 @@ header {
     padding: 8px 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     animation: bubbleAppear 0.5s ease-out;
-    min-width: 220px;
-    max-width: 320px;
+    min-width: 260px;
+    max-width: 380px;
     min-height: 40px;
     z-index: 1000;
     white-space: normal;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
 }
 
 .speech-text {
@@ -87,7 +87,7 @@ header {
     font-size: 0.85rem;
     font-weight: 500;
     line-height: 1.4;
-    text-align: center;
+    text-align: left;
     word-break: break-word;
     max-width: 100%;
 }
@@ -95,7 +95,7 @@ header {
 .speech-arrow {
     position: absolute;
     left: -8px;
-    top: 50%;
+    top: calc(50% - 1px);
     transform: translateY(-50%);
     width: 0;
     height: 0;
@@ -108,12 +108,12 @@ header {
     content: '';
     position: absolute;
     left: 2px;
-    top: -10px;
+    top: -9px;
     width: 0;
     height: 0;
-    border-top: 10px solid transparent;
-    border-bottom: 10px solid transparent;
-    border-right: 10px solid #3498db;
+    border-top: 9px solid transparent;
+    border-bottom: 9px solid transparent;
+    border-right: 9px solid #3498db;
 }
 
 /* アニメーション */
@@ -923,19 +923,20 @@ header h1 {
         left: 55px;
         top: 2px;
         margin-top: 0;
-        min-width: 180px;
-        max-width: 250px;
+        min-width: 200px;
+        max-width: 280px;
         min-height: 35px;
-        text-align: center;
+        text-align: left;
         white-space: normal;
         padding: 6px 10px;
         display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: flex-start;
     }
     
     .speech-arrow {
         left: -6px;
+        top: calc(50% - 1px);
     }
     
     .mascot-character {
